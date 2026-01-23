@@ -339,7 +339,7 @@ The ABRTTDMS case study adds realistic complexity in comparison of the voting sy
 
 **Note:** This case study is adapted from the Mobile-C traffic detection system available at: https://www.mobilec.org/apps/lbds/
 
-The complete state machine diagrams for all agents are given bellow.
+The complete mobile state diagrams (MSDs) for all agents are given bellow.
 
 ## 8. ABRTTDMS Modeling using MSDs 
 We provide here the diagrams used to model the case study modeled in our tool:
