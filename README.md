@@ -1,4 +1,4 @@
-# Agent-Based Real-Time Traffic Detection and Management System (ABRTTDMS)
+# ABRTTDMS Case Study - Complete Specifications and Verification Results
 
 ## 1. System Overview
 
