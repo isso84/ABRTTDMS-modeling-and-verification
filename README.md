@@ -373,9 +373,29 @@ The syntax of the code in the document is abstract, the tool generated automatic
 
 ## 10. ABRTTDMS verification in CADP
 
-The analysis and verification of the ABRTTDMS system in CADP starts by converting Pi-calculus into LNT using their tool PIC2LNT. 
+The analysis and verification of the ABRTTDMS system in CADP starts by converting the Pi-calculus code into LNT code using the CADP tool: PIC2LNT. 
 Afterthat, we need to construt the BCG (Binary Coded Graphs), which is a binary file format for labelled transition systems, to enable doing numerous types of analysis and verification.
 BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). 
+As you can see, the LTS has a huge number of states and transitions, so the graph is very dense. CADP offers the possibility to reduce this huge number, by using Strong Equivalence, which results in a another equivalent graph with less states and transitions.
+Now, we can start verifiying whatever we want using different built-in tools in CADP as you can see in the figure:
+<img width="1005" height="567" alt="image" src="https://github.com/user-attachments/assets/0053cf83-a6d2-4b91-8b51-e586c51bb3cd" />
+We can immediately check the deadlock, the livelock, existing unreachable states, and other  built-in interested verifications such as show in the figure:
+<img width="1307" height="826" alt="image" src="https://github.com/user-attachments/assets/d4ccf2c2-06ff-41f2-9f96-41371e063179" />
+We can simulate the behavior of agents by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
+You can draw in realtime your LTS of the BCG and edit it immediately if interesting of visualizing a specific part of the LTS (see the figure bellow)
+<img width="1304" height="569" alt="image" src="https://github.com/user-attachments/assets/5d74bd56-128e-4607-808d-0ce7aad26092" />
+
+
+We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking as it is shown in the figure:
+<img width="1304" height="658" alt="image" src="https://github.com/user-attachments/assets/3a8d46ff-7d73-48cf-ac13-30db2dc962ad" />
+
+
+
+You can also show the statistics of performance of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or have general numbers about all the process as in the figure:
+<img width="1306" height="617" alt="image" src="https://github.com/user-attachments/assets/ed137b61-b8bb-44c6-9fba-b54db6fc592e" />
+
+
+
 
 
 
