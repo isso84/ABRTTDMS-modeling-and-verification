@@ -375,7 +375,7 @@ The syntax of the code in the document is abstract, the tool generated automatic
 
 The analysis and verification of the ABRTTDMS system in CADP starts by converting Pi-calculus into LNT using their tool PIC2LNT. 
 Afterthat, we need to construt the BCG (Binary Coded Graphs), which is a binary file format for labelled transition systems, to enable doing numerous types of analysis and verification.
-BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [pdf](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/paper_ACM_approch_only_Generated_picalculus.pdf). 
+BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). 
 
 
 
