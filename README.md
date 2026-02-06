@@ -368,13 +368,14 @@ We provide here the diagrams used to model the case study modeled in our tool:
 
 Using our developed tool, we can immediatley generate the pi-calculus code corresponding to the diagrams. 
 The code is mainly shown and explained in this document: [pdf](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/paper_ACM_approch_only_Generated_picalculus.pdf).
-The syntax of the code in the document is abstract, the tool generated automatically the concrete sysntax which is accepted by analysis tools. It is given given in this file : 
+The syntax of the code in the document is abstract, the tool generated automatically the concrete sysntax which is accepted by analysis tools. It is given given in this textual file :
+[txt](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.pic) 
 
 ## 10. ABRTTDMS verification in CADP
 
-Using our developed tool, we can immediatley generate the pi-calculus code corresponding to the diagrams. 
-The  is mainly shown and explained in this document: [pdf](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/paper_ACM_approch_only_Generated_picalculus.pdf).
-
+The analysis and verification of the ABRTTDMS system in CADP starts by converting Pi-calculus into LNT using their tool PIC2LNT. 
+Afterthat, we need to construt the BCG (Binary Coded Graphs), which is a binary file format for labelled transition systems, to enable doing numerous types of analysis and verification.
+BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [pdf](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/paper_ACM_approch_only_Generated_picalculus.pdf). 
 
 
 
