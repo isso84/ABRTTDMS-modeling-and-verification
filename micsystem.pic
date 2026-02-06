@@ -1,0 +1,592 @@
+agent P1_0(l1,l2,l3,l4,p1,p2,p3,p4) = p1(a1,m1).P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1)
+
+agent P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) = 'a1.P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) + p1(a2,m2).P1_2(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1,a2,m2) + m1(d).([d=l2]'p2<a1,m1>.P1_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l3]'p3<a1,m1>.P1_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l4]'p4<a1,m1>.P1_0(l1,l2,l3,l4,p1,p2,p3,p4))
+
+agent P1_2(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1,a2,m2) = 'a1.P1_2(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1,a2,m2) + 'a2.P1_2(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1,a2,m2) + m1(d).([d=l2]'p2<a1,m1>.P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a2,m2) + [d=l3]'p3<a1,m1>.P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a2,m2) + [d=l4]'p4<a1,m1>.P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a2,m2)) + m2(d).([d=l2]'p2<a2,m2>.P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) + [d=l3]'p3<a2,m2>.P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) + [d=l4]'p4<a2,m2>.P1_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1))
+
+agent P2_0(l1,l2,l3,l4,p1,p2,p3,p4) = p2(a1,m1).P2_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1)
+
+agent P2_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) = 'a2.P2_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) + m1(d).([d=l1]'p1<a1,m1>.P2_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l3]'p3<a1,m1>.P2_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l4]'p4<a1,m1>.P2_0(l1,l2,l3,l4,p1,p2,p3,p4))
+
+agent P3_0(l1,l2,l3,l4,p1,p2,p3,p4) = p3(a1,m1).P3_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1)
+
+agent P3_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) = 'a3.P3_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) + m1(d).([d=l1]'p1<a1,m1>.P3_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l2]'p2<a1,m1>.P3_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l4]'p4<a1,m1>.P3_0(l1,l2,l3,l4,p1,p2,p3,p4))
+
+agent P4_0(l1,l2,l3,l4,p1,p2,p3,p4) = p4(a1,m1).P4_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1)
+
+agent P4_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) = 'a4.P4_1(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1) + m1(d).([d=l1]'p1<a1,m1>.P4_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l2]'p2<a1,m1>.P4_0(l1,l2,l3,l4,p1,p2,p3,p4) + [d=l3]'p3<a1,m1>.P4_0(l1,l2,l3,l4,p1,p2,p3,p4))
+
+agent Pc(l1,l2,l3,l4,a1,m1) = (^p1,p2,p3,p4)(P1_2(l1,l2,l3,l4,p1,p2,p3,p4,a1,m1,a2,m2) | P2_0(l1,l2,l3,l4,p1,p2,p3,p4) | P3_0(l1,l2,l3,l4,p1,p2,p3,p4) | P4_0(l1,l2,l3,l4,p1,p2,p3,p4))
+
+
+agent I_MIC(createagent) = createagent.Created
+
+agent F_MIC(endo) = 'endo.F_MIC(endo)
+
+agent Created(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired) = a1.Created(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired) + evint1(z).([z=dispatchCommand]'rtc1.TravelingToPolice(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired) + [z=createAgent]'rtc1.Created(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired) + [z=networkFailure]'rtc1.Created(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired) + [z=retryTimerExpired]'rtc1.Created(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired))
+
+agent TravelingToPolice(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice) = a1.TravelingToPolice(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice) + evint1(z).([z=networkFailure]'rtc1.WaitingForNetwork(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice) + [z=createAgent]'rtc1.TravelingToPolice(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice) + [z=dispatchCommand]'rtc1.TravelingToPolice(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice) + [z=retryTimerExpired]'rtc1.TravelingToPolice(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice)) + 'm1<l2>.(^done1)(AH_arrivedAtPolice(arrivedAtPolice,done1) | done1.PoliceStationOperations(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice))
+
+
+
+
+
+agent AH_arrivedAtPolice(arrivedAtPolice,done1) = 'arrivedAtPolice.'done1.0
+
+agent TravelingToEmergency(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtEmergency) = a1.TravelingToEmergency(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtEmergency) + evint1(z).([z=networkFailure]'rtc1.WaitingForNetwork(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtEmergency) + [z=createAgent]'rtc1.TravelingToEmergency(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtEmergency) + [z=dispatchCommand]'rtc1.TravelingToEmergency(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtEmergency) + [z=retryTimerExpired]'rtc1.TravelingToEmergency(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtEmergency)) + 'm1<l3>.(^done1)(AH_arrivedAtEmergency(arrivedAtEmergency,done1) | done1.EmergencyServicesOperations(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtEmergency))
+
+agent AH_arrivedAtEmergency(arrivedAtEmergency,done1) = 'arrivedAtEmergency.'done1.0
+
+agent TravelingToMaintenance(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtMaintenance) = a1.TravelingToMaintenance(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtMaintenance) + evint1(z).([z=networkFailure]'rtc1.WaitingForNetwork(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtMaintenance) + [z=createAgent]'rtc1.TravelingToMaintenance(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtMaintenance) + [z=dispatchCommand]'rtc1.TravelingToMaintenance(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtMaintenance) + [z=retryTimerExpired]'rtc1.TravelingToMaintenance(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtMaintenance)) + 'm1<l4>.(^done1)(AH_arrivedAtMaintenance(arrivedAtMaintenance,done1) | done1.MaintenanceDepotOperations(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtMaintenance))
+
+agent AH_arrivedAtMaintenance(arrivedAtMaintenance,done1) = 'arrivedAtMaintenance.'done1.0
+
+
+
+
+
+agent WaitingForNetwork(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.WaitingForNetwork(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + evint1(z).([z=retryTimerExpired]'rtc1.RetryingMigration(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [z=createAgent]'rtc1.WaitingForNetwork(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [z=dispatchCommand]'rtc1.WaitingForNetwork(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [z=networkFailure]'rtc1.WaitingForNetwork(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)) + (^g)('timeoutExceeded<g>.g(y).([y=true]AbortingMission(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]WaitingForNetwork(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g1)('networkRestored<g1>.g1(y1).([y1=true](^g2)('atMigrationStep1<g2>.g2(y2).([y2=true]TravelingToPolice(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y2=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + [y1=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + (^g3)('networkRestored<g3>.g3(y3).([y3=true](^g4)('atMigrationStep2<g4>.g4(y4).([y4=true]TravelingToEmergency(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y4=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + [y3=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + (^g5)('networkRestored<g5>.g5(y5).([y5=true](^g6)('atMigrationStep3<g6>.g6(y6).([y6=true]TravelingToMaintenance(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y6=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + [y5=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + (^g7)('networkRestored<g7>.g7(y7).([y7=true](^g8)('atMigrationStepReturn<g8>.g8(y8).([y8=true]ReturningToTMCA(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y8=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + [y7=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + (^g9)('maxRetriesExceeded<g9>.g9(y9).([y9=true]AbortingMission(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y9=false]RetryingMigration(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+
+
+
+
+
+
+agent AbortingMission(a1,m1,l1,l2,l3,l4,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.AbortingMission(a1,m1,l1,l2,l3,l4,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done1)(AH_prepareFailureReport(prepareFailureReport,done1) | done1.ReturningToTMCA(a1,m1,l1,l2,l3,l4,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_prepareFailureReport(prepareFailureReport,done1) = 'prepareFailureReport.'done1.0
+
+agent PoliceStationOperations(a1) = a1.PoliceStationOperations(a1) + finish.(^done1)(AH_missionStep1Complete(missionStep1Complete,done1) | done1.TravelingToEmergency(a1))
+
+agent AH_missionStep1Complete(missionStep1Complete,done1) = 'missionStep1Complete.'done1.0
+
+agent AuthenticatingPolice(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.AuthenticatingPolice(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('authenticationSuccess<g>.g(y).([y=true]QueryingPoliceDatabase(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]AuthenticatingPolice(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + (^g)('authenticationFailure<g>.g(y).([y=true]WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]AuthenticatingPolice(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent QueryingPoliceDatabase(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.QueryingPoliceDatabase(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done1)(AH_queryExecuted(queryExecuted,done1) | done1.CollectingIncidentData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_queryExecuted(queryExecuted,done1) = 'queryExecuted.'done1.0
+
+agent CollectingIncidentData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.CollectingIncidentData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done2)(AH_dataRetrieved(dataRetrieved,done2) | done2.PackagingPoliceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_dataRetrieved(dataRetrieved,done2) = 'dataRetrieved.'done2.0
+
+
+
+
+
+
+
+
+
+
+agent PackagingPoliceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.PackagingPoliceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + t.(^done3)(AH_packagingComplete(packagingComplete,done3) | done3.NotifyingTMCAProgressPolice(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_packagingComplete(packagingComplete,done3) = 'packagingComplete.'done3.0
+
+agent NotifyingTMCAProgressPolice(a1,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.NotifyingTMCAProgressPolice(a1,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done4)(AH_progressUpdate(evext2,progressUpdate,done4) | done4.'finish.0)
+
+agent AH_progressUpdate(evext2,progressUpdate,done4) = 'evext2<progressUpdate>.'done4.0
+
+agent EmergencyServicesOperations(a1) = a1.EmergencyServicesOperations(a1) + finish.(^done1)(AH_missionStep2Complete(missionStep2Complete,done1) | done1.TravelingToMaintenance(a1))
+
+agent AH_missionStep2Complete(missionStep2Complete,done1) = 'missionStep2Complete.'done1.0
+
+agent AuthenticatingEmergency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.AuthenticatingEmergency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('authenticationSuccess<g>.g(y).([y=true]QueryingEmergencyStatus(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]AuthenticatingEmergency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + (^g)('authenticationFailure<g>.g(y).([y=true]WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]AuthenticatingEmergency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent QueryingEmergencyStatus(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.QueryingEmergencyStatus(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done1)(AH_queryExecuted(queryExecuted,done1) | done1.CollectingAmbulanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent CollectingAmbulanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.CollectingAmbulanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done2)(AH_dataRetrieved(dataRetrieved,done2) | done2.PackagingEmergencyData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent PackagingEmergencyData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.PackagingEmergencyData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done3)(AH_packagingComplete(packagingComplete,done3) | done3.NotifyingTMCAProgressEmergency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+
+
+
+
+
+
+
+
+
+agent NotifyingTMCAProgressEmergency(a1,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.NotifyingTMCAProgressEmergency(a1,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done4)(AH_progressUpdate(evext2,progressUpdate,done4) | done4.'finish.0)
+
+agent MaintenanceDepotOperations(a1) = a1.MaintenanceDepotOperations(a1) + finish.(^done1)(AH_missionStep3Complete(missionStep3Complete,done1) | done1.ConsolidatingAllData(a1))
+
+agent AH_missionStep3Complete(missionStep3Complete,done1) = 'missionStep3Complete.'done1.0
+
+agent AuthenticatingMaintenance(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.AuthenticatingMaintenance(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('authenticationSuccess<g>.g(y).([y=true]QueryingEquipmentStatus(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]AuthenticatingMaintenance(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))) + (^g)('authenticationFailure<g>.g(y).([y=true]WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]AuthenticatingMaintenance(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent QueryingEquipmentStatus(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.QueryingEquipmentStatus(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done1)(AH_queryExecuted(queryExecuted,done1) | done1.CollectingMaintenanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent CollectingMaintenanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.CollectingMaintenanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done2)(AH_dataRetrieved(dataRetrieved,done2) | done2.PackagingMaintenanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent PackagingMaintenanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.PackagingMaintenanceData(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done3)(AH_packagingComplete(packagingComplete,done3) | done3.NotifyingTMCAProgressMaintenance(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent NotifyingTMCAProgressMaintenance(a1,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.NotifyingTMCAProgressMaintenance(a1,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done4)(AH_progressUpdate(evext2,progressUpdate,done4) | done4.'finish.0)
+
+agent ConsolidatingAllData(a1) = a1.ConsolidatingAllData(a1) + join.join.join.(^g)('allValidationsComplete<g>.g(y).([y=true]MergingResults(a1) + [y=false]ConsolidatingAllData(a1)))
+
+agent CheckingPoliceCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.CheckingPoliceCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('completenessOK<g>.g(y).([y=true]CheckingPoliceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]CheckingPoliceCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent CheckingPoliceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.CheckingPoliceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('consistencyOK<g>.g(y).([y=true]PoliceValid(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]CheckingPoliceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent PoliceValid(a1) = 'join.0
+
+
+
+
+
+
+
+
+
+
+agent CheckingEmergencyCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.CheckingEmergencyCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('completenessOK<g>.g(y).([y=true]CheckingEmergencyConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]CheckingEmergencyCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent CheckingEmergencyConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.CheckingEmergencyConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('consistencyOK<g>.g(y).([y=true]EmergencyValid(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]CheckingEmergencyConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent EmergencyValid(a1) = 'join.0
+
+agent CheckingMaintenanceCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.CheckingMaintenanceCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('completenessOK<g>.g(y).([y=true]CheckingMaintenanceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]CheckingMaintenanceCompleteness(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent CheckingMaintenanceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.CheckingMaintenanceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^g)('consistencyOK<g>.g(y).([y=true]MaintenanceValid(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]CheckingMaintenanceConsistency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent MaintenanceValid(a1) = 'join.0
+
+agent MergingResults(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.MergingResults(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + (^done1)(AH_mergeComplete(mergeComplete,done1) | done1.CreatingFinalReport(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_mergeComplete(mergeComplete,done1) = 'mergeComplete.'done1.0
+
+agent CreatingFinalReport(a1,m1,l1,l2,l3,l4,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.CreatingFinalReport(a1,m1,l1,l2,l3,l4,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done1)(AH_results(evext2,results,done1) | done1.ReturningToTMCA(a1,m1,l1,l2,l3,l4,evext2,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_results(evext2,results,done1) = 'evext2<results>.'done1.0
+
+agent ReturningToTMCA(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.ReturningToTMCA(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + evint1(z).([z=networkFailure]'rtc1.WaitingForNetwork(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + [z=createAgent]'rtc1.ReturningToTMCA(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + [z=dispatchCommand]'rtc1.ReturningToTMCA(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + [z=retryTimerExpired]'rtc1.ReturningToTMCA(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources)) + 'm1<l1>.(^done1)(AH_arrivedAtTMCA(arrivedAtTMCA,done1) | done1.ReportingToTMCA(a1,m1,l1,l2,l3,l4,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_arrivedAtTMCA(arrivedAtTMCA,done1) = 'arrivedAtTMCA.'done1.0
+
+
+
+
+
+
+
+
+agent ReportingToTMCA(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) = a1.ReportingToTMCA(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources) + (^done1)(AH_releaseResources(releaseResources,done1) | done1.Terminated(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources))
+
+agent AH_releaseResources(releaseResources,done1) = 'releaseResources.'done1.0
+
+agent Terminated(a1) = a1.Terminated(a1) + F_MIC(endo)
+
+agent WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) = a1.WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + evint1(z).([z=retryTimerExpired]'rtc1.(^g1)('atLocationPolice<g1>.g1(y1).([y1=true]AuthenticatingPolice(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y1=false](^g2)('atLocationEmergency<g2>.g2(y2).([y2=true]AuthenticatingEmergency(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y2=false](^g3)('atLocationMaintenance<g3>.g3(y3).([y3=true]AuthenticatingMaintenance(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y3=false]WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))))))) + [z=createAgent]'rtc1.WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [z=dispatchCommand]'rtc1.WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [z=networkFailure]'rtc1.WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)) + (^g)('maxAuthRetriesExceeded<g>.g(y).([y=true]AbortingMission(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete) + [y=false]WaitingRetryAuth(a1,evint1,rtc1,createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)))
+
+agent A1PL_0(evint1,evext1,rtc1) = evext1(x_1).A1PL_1(evint1,evext1,rtc1,x_1)
+
+agent A1PL_1(evint1,evext1,rtc1,x_1) = evext1(x_2).A1PL_2(evint1,evext1,rtc1,x_1,x_2) + 'evint1<x_1>.rtc1.A1PL_0(evint1,evext1,rtc1)
+
+agent A1PL_2(evint1,evext1,rtc1,x_1,x_2) = evext1(x_3).A1PL_3(evint1,evext1,rtc1,x_1,x_2,x_3) + 'evint1<x_1>.rtc1.A1PL_1(evint1,evext1,rtc1,x_2)
+
+agent A1PL_3(evint1,evext1,rtc1,x_1,x_2,x_3) = 'evint1<x_1>.rtc1.A1PL_2(evint1,evext1,rtc1,x_2,x_3)
+
+agent A1RPL_0(remote1,evext1) = remote1(x_1).A1RPL_1(remote1,evext1,x_1)
+
+agent A1RPL_1(remote1,evext1,x_1) = remote1(x_2).A1RPL_2(remote1,evext1,x_1,x_2) + 'evext1<x_1>.A1RPL_0(remote1,evext1)
+
+agent A1RPL_2(remote1,evext1,x_1,x_2) = 'evext1<x_1>.A1RPL_1(remote1,evext1,x_2)
+
+
+
+
+
+
+
+agent CE(ttrue,ffalse,
+   authenticationSuccess,authenticationFailure,networkRestored,
+   atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+   timeoutExceeded,maxRetriesExceeded,
+   atLocationPolice,atLocationEmergency,atLocationMaintenance,
+   completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+=
+  authenticationSuccess(g).
+    ('g<ttrue>.CE(ttrue,ffalse,
+                 authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,
+                  authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  authenticationFailure(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  networkRestored(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  atMigrationStep1(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  atMigrationStep2(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  atMigrationStep3(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  atMigrationStepReturn(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  timeoutExceeded(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  maxRetriesExceeded(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  atLocationPolice(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  atLocationEmergency(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  atLocationMaintenance(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  completenessOK(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  consistencyOK(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  maxAuthRetriesExceeded(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
++
+  allValidationsComplete(g).
+    ('g<ttrue>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                 atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                 timeoutExceeded,maxRetriesExceeded,
+                 atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                 completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete)
+   + 'g<ffalse>.CE(ttrue,ffalse,authenticationSuccess,authenticationFailure,networkRestored,
+                  atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,
+                  timeoutExceeded,maxRetriesExceeded,
+                  atLocationPolice,atLocationEmergency,atLocationMaintenance,
+                  completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
+
+
+
+agent A_1(a1,m1,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) = (^evint1,rtc1)((^createAgent,dispatchCommand,networkFailure,retryTimerExpired,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete,arrivedAtPolice,arrivedAtEmergency,arrivedAtMaintenance,arrivedAtTMCA,missionStep1Complete,missionStep2Complete,missionStep3Complete,prepareFailureReport,queryExecuted,dataRetrieved,packagingComplete,progressUpdate,results,mergeComplete,releaseResources)(I_MIC(createagent)) | A1PL_0(evint1,evext1,rtc1)) | A1RPL_0(remote1,evext1)
+
+
+
+
+
+
+
+
+agent I_TMCA(start) = start.Initializing
+
+agent Initializing(a2,systemReady,allTDESARegistered,reportAnalyzed) = a2.Initializing(a2,systemReady,allTDESARegistered,reportAnalyzed) + (^g1)('systemReady<g1>.g1(y1).([y1=true](^g2)('allTDESARegistered<g2>.g2(y2).([y2=true]NormalMonitoring(a2,systemReady,allTDESARegistered,reportAnalyzed) + [y2=false]Initializing(a2,systemReady,allTDESARegistered,reportAnalyzed))) + [y1=false]Initializing(a2,systemReady,allTDESARegistered,reportAnalyzed)))
+
+agent NormalMonitoring(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) = a2.NormalMonitoring(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + evint2(z).([z=incidentReport]'rtc2.IncidentHandling(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=progressUpdate]'rtc2.NormalMonitoring(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=results]'rtc2.NormalMonitoring(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=createAgent]'rtc2.NormalMonitoring(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=userAcknowledges]'rtc2.NormalMonitoring(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges)) + 'finish.0
+
+agent ProcessingReport(a2,systemReady,allTDESARegistered,reportAnalyzed) = a2.ProcessingReport(a2,systemReady,allTDESARegistered,reportAnalyzed) + (^g1)('reportAnalyzed<g1>.g1(y1).([y1=true]DisplayingInGUI(a2,systemReady,allTDESARegistered,reportAnalyzed) + [y1=false]ProcessingReport(a2,systemReady,allTDESARegistered,reportAnalyzed)))
+agent DisplayingInGUI(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) = a2.DisplayingInGUI(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + evint2(z).([z=userAcknowledges]'rtc2.'finish.0 + [z=incidentReport]'rtc2.DisplayingInGUI(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=progressUpdate]'rtc2.DisplayingInGUI(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=results]'rtc2.DisplayingInGUI(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=createAgent]'rtc2.DisplayingInGUI(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges))
+
+agent CreatingMIC(a2,agentCreated,dispatchCommand,resultsDisplayed) = a2.CreatingMIC(a2,agentCreated,dispatchCommand,resultsDisplayed) + (^done1)(AH_agentCreated(agentCreated,done1) | done1.DispatchingMIC(a2,agentCreated,dispatchCommand,resultsDisplayed))
+
+agent AH_agentCreated(agentCreated,done1) = 'agentCreated.'done1.0
+
+agent DispatchingMIC(a2,evext1,agentCreated,dispatchCommand,resultsDisplayed) = a2.DispatchingMIC(a2,evext1,agentCreated,dispatchCommand,resultsDisplayed) + (^done1)(AH_dispatchCommand(evext1,dispatchCommand,done1) | done1.TrackingMIC(a2,evext1,agentCreated,dispatchCommand,resultsDisplayed))
+
+agent AH_dispatchCommand(evext1,dispatchCommand,done1) = 'evext1<dispatchCommand>.'done1.0
+
+agent TrackingMIC(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) = a2.TrackingMIC(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + evint2(z).([z=progressUpdate]'rtc2.TrackingMIC(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=results]'rtc2.ReceivingResults(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=incidentReport]'rtc2.TrackingMIC(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=createAgent]'rtc2.TrackingMIC(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges) + [z=userAcknowledges]'rtc2.TrackingMIC(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges))
+
+agent ReceivingResults(a2,agentCreated,dispatchCommand,resultsDisplayed) = a2.ReceivingResults(a2,agentCreated,dispatchCommand,resultsDisplayed) + (^done1)(AH_resultsDisplayed(resultsDisplayed,done1) | done1.NormalMonitoring(a2,agentCreated,dispatchCommand,resultsDisplayed))
+
+agent AH_resultsDisplayed(resultsDisplayed,done1) = 'resultsDisplayed.'done1.0
+
+agent IncidentHandling(a2) = a2.IncidentHandling(a2) + finish.NormalMonitoring(a2)
+
+agent MonitoringSystem(a2) = a2.MonitoringSystem(a2) + finish.evint2(z).([z=createAgent]'rtc2.CreatingMIC(a2,agentCreated,dispatchCommand,resultsDisplayed) + [z=incidentReport]'rtc2.MonitoringSystem(a2) + [z=progressUpdate]'rtc2.MonitoringSystem(a2) + [z=results]'rtc2.MonitoringSystem(a2) + [z=userAcknowledges]'rtc2.MonitoringSystem(a2))
+
+agent A2PL_0(evint2,evext2,rtc2) = evext2(x_1).A2PL_1(evint2,evext2,rtc2,x_1)
+
+agent A2PL_1(evint2,evext2,rtc2,x_1) = evext2(x_2).A2PL_2(evint2,evext2,rtc2,x_1,x_2) + 'evint2<x_1>.rtc2.A2PL_0(evint2,evext2,rtc2)
+
+agent A2PL_2(evint2,evext2,rtc2,x_1,x_2) = 'evint2<x_1>.rtc2.A2PL_1(evint2,evext2,rtc2,x_2)
+
+agent A2RPL_0(remote2,evext2) = remote2(x_1).A2RPL_1(remote2,evext2,x_1)
+
+agent A2RPL_1(remote2,evext2,x_1) = remote2(x_2).A2RPL_2(remote2,evext2,x_1,x_2) + 'evext2<x_1>.A2RPL_0(remote2,evext2)
+
+agent A2RPL_2(remote2,evext2,x_1,x_2) = 'evext2<x_1>.A2RPL_1(remote2,evext2,x_2)
+
+agent A_2(a2,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) = (^evint2,rtc2)((^incidentReport,progressUpdate,results,createAgent,userAcknowledges,systemReady,allTDESARegistered,reportAnalyzed,agentCreated,dispatchCommand,resultsDisplayed)(Initializing(a2,evint2,rtc2,incidentReport,progressUpdate,results,createAgent,userAcknowledges,systemReady,allTDESARegistered,reportAnalyzed,agentCreated,dispatchCommand,resultsDisplayed)) | A2PL_0(evint2,evext2,rtc2)) | A2RPL_0(remote2,evext2)
+
+
+
+
+
+
+
+
+
+agent I_LRDA(start) = start.Initializing
+
+agent Initializing(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal) = a3.Initializing(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal) + (^g1)('hardwareConnected<g1>.g1(y1).([y1=true](^g2)('registrationConfirmedTDESA<g2>.g2(y2).([y2=true]Monitoring(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal) + [y2=false]Initializing(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal))) + [y1=false]Initializing(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal)))
+
+agent Monitoring(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) = a3.Monitoring(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) + evint3(z).([z=dataReceived]'rtc3.Analyzing(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) + [z=hardwareFailure]'rtc3.Offline(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) + [z=hardwareRestored]'rtc3.Monitoring(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored))
+
+agent Analyzing(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal) = a3.Analyzing(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal) + (^g1)('travelTimeExceedsThreshold<g1>.g1(y1).([y1=true]DetectingIncident(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal) + [y1=false](^g2)('parametersNormal<g2>.g2(y2).([y2=true]Monitoring(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal) + [y2=false]Analyzing(a3,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal)))))
+
+agent DetectingIncident(a3,remote5,incidentAlert) = a3.DetectingIncident(a3,remote5,incidentAlert) + (^done1)(AH_incidentAlert(remote5,incidentAlert,done1) | done1.Monitoring(a3,remote5,incidentAlert))
+
+agent AH_incidentAlert(remote5,incidentAlert,done1) = 'remote5<incidentAlert>.'done1.0
+
+agent Offline(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) = a3.Offline(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) + evint3(z).([z=hardwareRestored]'rtc3.Initializing(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) + [z=dataReceived]'rtc3.Offline(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored) + [z=hardwareFailure]'rtc3.Offline(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored))
+
+agent A3PL_0(evint3,evext3,rtc3) = evext3(x_1).A3PL_1(evint3,evext3,rtc3,x_1)
+
+agent A3PL_1(evint3,evext3,rtc3,x_1) = evext3(x_2).A3PL_2(evint3,evext3,rtc3,x_1,x_2) + 'evint3<x_1>.rtc3.A3PL_0(evint3,evext3,rtc3)
+
+agent A3PL_2(evint3,evext3,rtc3,x_1,x_2) = 'evint3<x_1>.rtc3.A3PL_1(evint3,evext3,rtc3,x_2)
+
+agent A3RPL_0(remote3,evext3) = remote3(x_1).A3RPL_1(remote3,evext3,x_1)
+
+agent A3RPL_1(remote3,evext3,x_1) = remote3(x_2).A3RPL_2(remote3,evext3,x_1,x_2) + 'evext3<x_1>.A3RPL_0(remote3,evext3)
+
+agent A3RPL_2(remote3,evext3,x_1,x_2) = 'evext3<x_1>.A3RPL_1(remote3,evext3,x_2)
+
+agent A_3(a3,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) = (^evint3,rtc3)((^dataReceived,hardwareFailure,hardwareRestored,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal,incidentAlert)(Initializing(a3,evint3,rtc3,dataReceived,hardwareFailure,hardwareRestored,hardwareConnected,registrationConfirmedTDESA,travelTimeExceedsThreshold,parametersNormal,incidentAlert)) | A3PL_0(evint3,evext3,rtc3)) | A3RPL_0(remote3,evext3)
+
+
+
+
+
+
+
+
+
+agent I_VCDA(start) = start.Initializing
+
+agent Initializing(a4,cameraConnected,registrationConfirmedTDESA,analysisComplete) = a4.Initializing(a4,cameraConnected,registrationConfirmedTDESA,analysisComplete) + (^g1)('cameraConnected<g1>.g1(y1).([y1=true](^g2)('registrationConfirmedTDESA<g2>.g2(y2).([y2=true]Idle(a4,cameraConnected,registrationConfirmedTDESA,analysisComplete) + [y2=false]Initializing(a4,cameraConnected,registrationConfirmedTDESA,analysisComplete))) + [y1=false]Initializing(a4,cameraConnected,registrationConfirmedTDESA,analysisComplete)))
+
+agent Idle(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) = a4.Idle(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) + evint4(z).([z=verificationRequest]'rtc4.Verifying(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) + [z=cameraFailure]'rtc4.Offline(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) + [z=cameraRestored]'rtc4.Idle(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored))
+
+agent Verifying(a4,videoStreamAcquired,verificationReport) = a4.Verifying(a4,videoStreamAcquired,verificationReport) + (^done1)(AH_videoStreamAcquired(videoStreamAcquired,done1) | done1.AnalyzingVideo(a4,videoStreamAcquired,verificationReport))
+
+agent AH_videoStreamAcquired(videoStreamAcquired,done1) = 'videoStreamAcquired.'done1.0
+
+agent AnalyzingVideo(a4,remote5,cameraConnected,registrationConfirmedTDESA,analysisComplete,videoStreamAcquired,verificationReport) = a4.AnalyzingVideo(a4,remote5,cameraConnected,registrationConfirmedTDESA,analysisComplete,videoStreamAcquired,verificationReport) + (^g1)('analysisComplete<g1>.g1(y1).([y1=true](^done1)(AH_verificationReport(remote5,verificationReport,done1) | done1.Idle(a4,remote5,cameraConnected,registrationConfirmedTDESA,analysisComplete,videoStreamAcquired,verificationReport)) + [y1=false]AnalyzingVideo(a4,remote5,cameraConnected,registrationConfirmedTDESA,analysisComplete,videoStreamAcquired,verificationReport)))
+
+agent AH_verificationReport(remote5,verificationReport,done1) = 'remote5<verificationReport>.'done1.0
+
+agent Offline(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) = a4.Offline(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) + evint4(z).([z=cameraRestored]'rtc4.Initializing(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) + [z=verificationRequest]'rtc4.Offline(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored) + [z=cameraFailure]'rtc4.Offline(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored))
+
+agent A4PL_0(evint4,evext4,rtc4) = evext4(x_1).A4PL_1(evint4,evext4,rtc4,x_1)
+
+agent A4PL_1(evint4,evext4,rtc4,x_1) = evext4(x_2).A4PL_2(evint4,evext4,rtc4,x_1,x_2) + 'evint4<x_1>.rtc4.A4PL_0(evint4,evext4,rtc4)
+
+agent A4PL_2(evint4,evext4,rtc4,x_1,x_2) = 'evint4<x_1>.rtc4.A4PL_1(evint4,evext4,rtc4,x_2)
+
+agent A4RPL_0(remote4,evext4) = remote4(x_1).A4RPL_1(remote4,evext4,x_1)
+
+agent A4RPL_1(remote4,evext4,x_1) = remote4(x_2).A4RPL_2(remote4,evext4,x_1,x_2) + 'evext4<x_1>.A4RPL_0(remote4,evext4)
+
+agent A4RPL_2(remote4,evext4,x_1,x_2) = 'evext4<x_1>.A4RPL_1(remote4,evext4,x_2)
+
+agent A_4(a4,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) = (^evint4,rtc4)((^verificationRequest,cameraFailure,cameraRestored,cameraConnected,registrationConfirmedTDESA,analysisComplete,videoStreamAcquired,verificationReport)(Initializing(a4,evint4,rtc4,verificationRequest,cameraFailure,cameraRestored,cameraConnected,registrationConfirmedTDESA,analysisComplete,videoStreamAcquired,verificationReport)) | A4PL_0(evint4,evext4,rtc4)) | A4RPL_0(remote4,evext4)
+
+
+
+
+
+
+
+
+
+
+agent I_TDESA(start) = start.Initializing
+
+agent Initializing(a5,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed) = a5.Initializing(a5,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed) + (^g1)('agentReady<g1>.g1(y1).([y1=true](^g2)('minimumAgentsRegistered<g2>.g2(y2).([y2=true]NormalOperation(a5,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed) + [y2=false]Initializing(a5,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed))) + [y1=false]Initializing(a5,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed)))
+
+agent NormalOperation(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) = a5.NormalOperation(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) + evint5(z).([z=incidentAlert]'rtc5.IncidentProcessing(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) + [z=verificationReport]'rtc5.NormalOperation(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) + [z=userAcknowledges]'rtc5.NormalOperation(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges)) + 'finish.0
+
+agent CoordinatingVerification(a5,remote4,verificationRequest,incidentReport) = a5.CoordinatingVerification(a5,remote4,verificationRequest,incidentReport) + (^done1)(AH_verificationRequest(remote4,verificationRequest,done1) | done1.WaitingVerification(a5,remote4,verificationRequest,incidentReport))
+
+agent AH_verificationRequest(remote4,verificationRequest,done1) = 'remote4<verificationRequest>.'done1.0
+
+agent WaitingVerification(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) = a5.WaitingVerification(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) + evint5(z).([z=verificationReport]'rtc5.AnalyzingReport(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) + [z=incidentAlert]'rtc5.WaitingVerification(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges) + [z=userAcknowledges]'rtc5.WaitingVerification(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges))
+
+agent AnalyzingReport(a5,evext2,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed,verificationRequest,incidentReport) = a5.AnalyzingReport(a5,evext2,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed,verificationRequest,incidentReport) + (^g1)('incidentConfirmed<g1>.g1(y1).([y1=true]SendingReport(a5,evext2,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed,verificationRequest,incidentReport) + [y1=false](^g2)('incidentNotConfirmed<g2>.g2(y2).([y2=true]'finish.0 + [y2=false]AnalyzingReport(a5,evext2,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed,verificationRequest,incidentReport)))))
+
+agent SendingReport(a5,remote2,verificationRequest,incidentReport) = a5.SendingReport(a5,remote2,verificationRequest,incidentReport) + (^done1)(AH_incidentReport(remote2,incidentReport,done1) | done1.NormalOperation(a5,remote2,verificationRequest,incidentReport))
+
+agent AH_incidentReport(remote2,incidentReport,done1) = 'remote2<incidentReport>.'done1.0
+
+agent IncidentProcessing(a5) = a5.IncidentProcessing(a5) + finish.NormalOperation(a5)
+
+agent Monitoring(a5) = a5.Monitoring(a5) + finish.0
+
+agent A5PL_0(evint5,evext5,rtc5) = evext5(x_1).A5PL_1(evint5,evext5,rtc5,x_1)
+
+agent A5PL_1(evint5,evext5,rtc5,x_1) = evext5(x_2).A5PL_2(evint5,evext5,rtc5,x_1,x_2) + 'evint5<x_1>.rtc5.A5PL_0(evint5,evext5,rtc5)
+
+agent A5PL_2(evint5,evext5,rtc5,x_1,x_2) = 'evint5<x_1>.rtc5.A5PL_1(evint5,evext5,rtc5,x_2)
+
+agent A5RPL_0(remote5,evext5) = remote5(x_1).A5RPL_1(remote5,evext5,x_1)
+
+agent A5RPL_1(remote5,evext5,x_1) = remote5(x_2).A5RPL_2(remote5,evext5,x_1,x_2) + 'evext5<x_1>.A5RPL_0(remote5,evext5)
+
+agent A5RPL_2(remote5,evext5,x_1,x_2) = 'evext5<x_1>.A5RPL_1(remote5,evext5,x_2)
+
+agent A_5(a5,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) = (^evint5,rtc5)((^incidentAlert,verificationReport,userAcknowledges,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed,verificationRequest,incidentReport)(Initializing(a5,evint5,rtc5,incidentAlert,verificationReport,userAcknowledges,agentReady,minimumAgentsRegistered,incidentConfirmed,incidentNotConfirmed,reportAnalyzed,verificationRequest,incidentReport)) | A5PL_0(evint5,evext5,rtc5)) | A5RPL_0(remote5,evext5)
+
+
+
+
+
+
+agent MIC_System(evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) = (^a1,m1,a2,m2,a3,m3,a4,m4,a5,m5,l1,l2,l3,l4)(A_1(a1,m1,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) | A_2(a2,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) | A_3(a3,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) | A_4(a4,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) | A_5(a5,evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5) | Pc(l1,l2,l3,l4,a1,m1) | CE(true,false,authenticationSuccess,authenticationFailure,networkRestored,atMigrationStep1,atMigrationStep2,atMigrationStep3,atMigrationStepReturn,timeoutExceeded,maxRetriesExceeded,atLocationPolice,atLocationEmergency,atLocationMaintenance,completenessOK,consistencyOK,maxAuthRetriesExceeded,allValidationsComplete))
+
+MAIN = MIC_System(evext1,evext2,evext3,evext4,evext5,remote1,remote2,remote3,remote4,remote5)
+
+
+
+
+
+
+
