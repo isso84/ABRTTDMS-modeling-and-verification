@@ -373,9 +373,11 @@ The syntax of the code in the document is abstract, however the tool generates a
 
 ## 10. ABRTTDMS verification in CADP
 
-The analysis and verification of the ABRTTDMS system in CADP starts by converting the Pi-calculus code into LNT code using the CADP tool: PIC2LNT. 
+The analysis and verification of the ABRTTDMS system in CADP starts by converting the Pi-calculus code into LNT code using the CADP tool: [PIC2LNT](https://convecs.inria.fr/software/pic2lnt/)
+
 Afterthat, we need to construt the BCG (Binary Coded Graphs), which is a binary file format for labelled transition systems, to enable doing numerous types of analysis and verification.
 BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). 
+
 As you can see, the LTS has a huge number of states and transitions, so the graph is very dense. CADP offers the possibility to reduce this huge number, by using Strong Equivalence, which results in a another equivalent graph with less states and transitions.
 Now, we can start verifiying whatever we want using different built-in tools in CADP as you can see in the figure:
 <img width="1005" height="567" alt="image" src="https://github.com/user-attachments/assets/0053cf83-a6d2-4b91-8b51-e586c51bb3cd" />
