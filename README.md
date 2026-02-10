@@ -404,6 +404,143 @@ We can also use a very interested tool in pi-calculus which is the equivalence c
 We can check that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property as indicated in the figure:
 
 
+## Model checking
+Model checking is straitforward in CADP which offers multiple cutting-edge algorithms of model checking. The tool also provides the possiblity of using multiple format to express the properties we interested in verifying, such as .mcl, .xtl and even automating scripts in using SVG. As Model checking is considered among the main objectives of our apporach, we show in the following lines examples of verification of some properties.
+## Property Specifications
+### Safety Properties
+
+**SP1.mcl**(* SP1: MIC never executes a query without prior successful authentication *)
+```mcl
+[
+  (not 'PUBLIC .*authenticationSuccess.*')* .
+  'PUBLIC .*queryExecuted.*'
+] false
+```
+
+**SP2.mcl**(* SP2: packagingComplete always occurs before the next location arrival *)
+```mcl
+[
+  'PUBLIC .*arrivedAtPolice.*' .
+  (not 'PUBLIC .*packagingComplete.*')* .
+  'PUBLIC .*arrivedAtEmergency.*'
+] false
+and
+[
+  'PUBLIC .*arrivedAtEmergency.*' .
+  (not 'PUBLIC .*packagingComplete.*')* .
+  'PUBLIC .*arrivedAtMaintenance.*'
+] false
+```
+
+**SP3.mcl**(* SP3: incidentReport is never sent before verificationReport is received *)
+```mcl
+[
+  (not 'PUBLIC .*verificationReport.*')* .
+  'PUBLIC .*incidentReport.*'
+] false
+```
+
+**SP4.mcl**(* SP4: allValidationsComplete never fires twice without mergeComplete in between *)
+```mcl
+[
+  'PUBLIC .*allValidationsComplete.*' .
+  (not 'PUBLIC .*mergeComplete.*')* .
+  'PUBLIC .*allValidationsComplete.*'
+] false
+```
+
+### Liveness Properties
+
+**LP1.mcl**(* LP1: after incidentAlert, arrivedAtTMCA is inevitably reachable *)
+```mcl
+[ true* . 'PUBLIC .*incidentAlert.*' ]
+  <true*> 'PUBLIC .*arrivedAtTMCA.*'
+```
+
+**LP2.mcl**(* LP2: after dispatchCommand, either releaseResources or timeoutExceeded is reached *)
+```mcl
+[ true* . 'PUBLIC .*dispatchCommand.*' ]
+  <true*> (
+    <true*> 'PUBLIC .*releaseResources.*'
+    or
+    <true*> 'PUBLIC .*timeoutExceeded.*'
+  )
+```
+
+**LP3.mcl**(* LP3: after verificationRequest, verificationReport is inevitably reachable *)
+```mcl
+[ true* . 'PUBLIC .*verificationRequest.*' ]
+  <true*> 'PUBLIC .*verificationReport.*'
+```
+
+**LP4.mcl**(* LP4: after networkFailure followed by retryTimerExpired, system is operational *)
+```mcl
+[ true* . 'PUBLIC .*networkFailure.*' ]
+  <true*> 'PUBLIC .*retryTimerExpired.*'
+```
+
+### Mobility Properties
+
+**MP1.mcl**(* MP1a: Police is always visited before Emergency *)
+```mcl
+[
+  (not 'PUBLIC .*arrivedAtPolice.*')* .
+  'PUBLIC .*arrivedAtEmergency.*'
+] false
+and
+[
+  (not 'PUBLIC .*arrivedAtEmergency.*')* .
+  'PUBLIC .*arrivedAtMaintenance.*'
+] false
+and
+[ true* . 'PUBLIC .*arrivedAtPolice.*' ]
+  <true*> 'PUBLIC .*arrivedAtEmergency.*'
+and
+[ true* . 'PUBLIC .*arrivedAtEmergency.*' ]
+  <true*> 'PUBLIC .*arrivedAtMaintenance.*'
+and
+[ true* . 'PUBLIC .*arrivedAtMaintenance.*' ]
+  <true*> 'PUBLIC .*arrivedAtTMCA.*'
+```
+
+**MP2.mcl**(* MP2: after prepareFailureReport (AbortingMission), arrivedAtTMCA is reachable *)
+```mcl
+[ true* . 'PUBLIC .*prepareFailureReport.*' ]
+  <true*> 'PUBLIC .*arrivedAtTMCA.*'
+```
+
+**MP3.mcl**(* MP3a: agent cannot be at Police and Emergency at the same time *)
+```mcl
+[
+  'PUBLIC .*arrivedAtPolice.*' .
+  (not 'PUBLIC .*missionStep1Complete.*')* .
+  'PUBLIC .*arrivedAtEmergency.*'
+] false
+and
+[
+  'PUBLIC .*arrivedAtEmergency.*' .
+  (not 'PUBLIC .*missionStep2Complete.*')* .
+  'PUBLIC .*arrivedAtMaintenance.*'
+] false
+and
+[
+  'PUBLIC .*arrivedAtMaintenance.*' .
+  (not 'PUBLIC .*missionStep3Complete.*')* .
+  'PUBLIC .*arrivedAtPolice.*'
+] false
+```
+
+The results of checking these properties in CADP is given in the following figure:
+
+<img width="1195" height="698" alt="Screenshot from 2026-02-10 09-39-14" src="https://github.com/user-attachments/assets/17e82113-cfa5-42bc-8e33-c7f46e255035" />
+
+
+
+
+
+
+
+
 
 Finally, We can also show the statistics of performance of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or have general statistics about all the process as in the figure:
 
