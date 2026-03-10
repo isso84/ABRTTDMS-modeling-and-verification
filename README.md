@@ -518,7 +518,7 @@ Some results of checking these properties in CADP is given in the following figu
 
 It is also possible to check in the ABRTTDMS the existing of any deadlock, unreachable states, the livelock, and other built-in interesteing verifications as shown in the figure:
 
-<img width="1005" height="567" alt="image" src="https://github.com/user-attachments/assets/0053cf83-a6d2-4b91-8b51-e586c51bb3cd" />
+<img width="1269" height="815" alt="Screenshot from 2026-03-10 10-28-30" src="https://github.com/user-attachments/assets/c56d7dab-9687-4805-87c0-1ea8532e1655" />
 
 It is possilbe also to simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
 
