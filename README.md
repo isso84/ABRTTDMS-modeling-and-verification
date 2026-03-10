@@ -522,15 +522,9 @@ It is also possible to check in the ABRTTDMS the existing of any deadlock, unrea
 
 It is possilbe also to simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
 
-Another opotion is to draw in realtime the LTS of the BCG and edit it immediately if interested in visualizing specific parts of the LTS to understand more the system (see the figure bellow)
+Another opotion is to draw in realtime the LTS of the BCG and edit it immediately if interested in visualizing specific parts of the LTS to understand more the system.
 
-<img width="1304" height="569" alt="image" src="https://github.com/user-attachments/assets/5d74bd56-128e-4607-808d-0ce7aad26092" />
-
-We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking as it is shown in the figure:
-
-<img width="1304" height="658" alt="image" src="https://github.com/user-attachments/assets/3a8d46ff-7d73-48cf-ac13-30db2dc962ad" />
-
-We can check for example that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property easily.
+We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking. We can check for example that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property easily.
 
 Finally, We can also show the statistics of performance of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or have general statistics about all the process.
 
