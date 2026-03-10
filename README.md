@@ -379,32 +379,10 @@ There will be a generation of a labelled transition system (LTS), which represen
 
 Afterthat, we need to construt the BCG (Binary Coded Graphs), which is a binary file format for LTS , that enable doing numerous types of analysis and verification. In fact, BCG is both a format for the LTS representation and a set of libraries and programs dealing with LTSs (information, display, edition, minimization, etc.).
 
-BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). The BCG file itself is downloadable from here [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps)
+BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). The BCG file itself is downloadable from here [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.bcg)
 
-
-
-As you can see, the LTS has a huge number of states and transitions, so the graph is very dense. CADP offers the possibility to reduce this huge number, by using Strong Equivalence, which results in a another equivalent graph with less states and transitions.
-Now, we can start verifiying whatever we want using different built-in tools in CADP as you can see in the figure:
-
-<img width="1005" height="567" alt="image" src="https://github.com/user-attachments/assets/0053cf83-a6d2-4b91-8b51-e586c51bb3cd" />
-
-We can immediately check in the ABRTTDMS the existing of any deadlock, unreachable states, the livelock, and other built-in interesteing verifications as shown in the figure:
-
-<img width="1307" height="826" alt="image" src="https://github.com/user-attachments/assets/d4ccf2c2-06ff-41f2-9f96-41371e063179" />
-
-We can simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
-
-We can draw in realtime your LTS of the BCG and edit it immediately if interested in visualizing specific parts of the LTS to understand more the system (see the figure bellow)
-
-<img width="1304" height="569" alt="image" src="https://github.com/user-attachments/assets/5d74bd56-128e-4607-808d-0ce7aad26092" />
-
-
-We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking as it is shown in the figure:
-
-<img width="1304" height="658" alt="image" src="https://github.com/user-attachments/assets/3a8d46ff-7d73-48cf-ac13-30db2dc962ad" />
-
-We can check that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property as indicated in the figure:
-
+As we can notice, the LTS has a huge number of states and transitions, so the graph is very dense. CADP offers the possibility to reduce this huge number, by using Strong Equivalence, which results in a another equivalent graph with less states and transitions.
+Then, CADP offers mutiliple built-in verification tools, and we can start checking whatever we want using these tools.
 
 ## Model checking
 Model checking is straitforward in CADP which offers multiple cutting-edge algorithms of model checking. The tool also provides the possiblity of using multiple format to express the properties we interested in verifying, such as .mcl, .xtl and even automating scripts in using SVG. As Model checking is considered among the main objectives of our apporach, we show in the following lines examples of verification of some properties.
@@ -532,19 +510,29 @@ and
 ] false
 ```
 
-The results of checking these properties in CADP is given in the following figure:
+Some results of checking these properties in CADP is given in the following figure:
 
-<img width="1195" height="698" alt="Screenshot from 2026-02-10 09-39-14" src="https://github.com/user-attachments/assets/17e82113-cfa5-42bc-8e33-c7f46e255035" />
+<img width="1269" height="815" alt="Screenshot from 2026-03-10 09-58-54" src="https://github.com/user-attachments/assets/2bdb03de-cbc3-4ff9-87bb-5437c06260b8" />
 
+## Other verification possibilities
 
+It is also possible to check in the ABRTTDMS the existing of any deadlock, unreachable states, the livelock, and other built-in interesteing verifications as shown in the figure:
 
+<img width="1005" height="567" alt="image" src="https://github.com/user-attachments/assets/0053cf83-a6d2-4b91-8b51-e586c51bb3cd" />
 
+It is possilbe also to simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
 
+Another opotion is to draw in realtime the LTS of the BCG and edit it immediately if interested in visualizing specific parts of the LTS to understand more the system (see the figure bellow)
 
+<img width="1304" height="569" alt="image" src="https://github.com/user-attachments/assets/5d74bd56-128e-4607-808d-0ce7aad26092" />
 
+We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking as it is shown in the figure:
 
+<img width="1304" height="658" alt="image" src="https://github.com/user-attachments/assets/3a8d46ff-7d73-48cf-ac13-30db2dc962ad" />
 
-Finally, We can also show the statistics of performance of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or have general statistics about all the process as in the figure:
+We can check for example that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property easily.
+
+Finally, We can also show the statistics of performance of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or have general statistics about all the process.
 
 <img width="1306" height="617" alt="image" src="https://github.com/user-attachments/assets/ed137b61-b8bb-44c6-9fba-b54db6fc592e" />
 
