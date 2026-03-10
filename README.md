@@ -527,12 +527,3 @@ Another opotion is to draw in realtime the LTS of the BCG and edit it immediatel
 We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking. We can check for example that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property easily.
 
 Finally, We can also show the statistics of performance of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or have general statistics about all the process.
-
-<img width="1306" height="617" alt="image" src="https://github.com/user-attachments/assets/ed137b61-b8bb-44c6-9fba-b54db6fc592e" />
-
-
-
-
-
-
-
