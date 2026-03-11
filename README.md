@@ -330,7 +330,7 @@ The system demonstrates properties suitable for formal verification using π-cal
 
 The ABRTTDMS case study adds realistic complexity in comparison of the voting system :
 - Hierarchical coordination (LRDA/VCDA → TDESA → TMCA)
-- Multiple mobile agent instances (concurrent MICs)
+- Easy extension to multiple mobile agent instances (concurrent MICs)
 - Parallel data validation
 - Real-time monitoring and verification loops
 - Failure handling with autonomous recovery
