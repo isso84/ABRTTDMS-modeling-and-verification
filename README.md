@@ -1,4 +1,5 @@
 # ABRTTDMS Case Study - Complete Specifications and Verification Results
+**Note:** This case study is adapted from the Mobile-C traffic detection system available at: https://www.mobilec.org/apps/lbds/
 
 ## 1. System Overview
 
@@ -336,8 +337,6 @@ The ABRTTDMS case study adds realistic complexity in comparison of the voting sy
 - Failure handling with autonomous recovery
 
 ---
-
-**Note:** This case study is adapted from the Mobile-C traffic detection system available at: https://www.mobilec.org/apps/lbds/
 
 The complete mobile state diagrams (MSDs) for all agents are given bellow.
 
