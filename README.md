@@ -366,33 +366,33 @@ We provide here the diagrams used to model the case study modeled in our tool:
 
 ## 9. ABRTTDMS MSDs-generated pi-calculus code
 
-Using our developed tool, we can immediatley generate the pi-calculus code corresponding to the diagrams. 
+Using our developed tool, we can immediately generate the pi-calculus code corresponding to the diagrams.
 The code is mainly shown and explained in this document: [pdf](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/paper_ACM_approch_only_Generated_picalculus.pdf).
-The syntax of the code in the document is abstract, however the tool generates automatically the concrete sysntax (e.g. the restriction $\nu$ as \^, the output action $\overline{x}$ as 'x, the internal action $\tau$ as t, each process identifier expression starts with the keyword $agent$, and processes are closed) which is accepted by analysis tools. It is given in this textual file :
-[txt](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.pic) 
+The syntax of the code in the document is abstract; however, the tool automatically generates the concrete syntax (e.g., the restriction $\nu$ as ^, the output action $\overline{x}$ as 'x, the internal action $\tau$ as t. Each process identifier expression starts with the keyword $agent$, and processes are closed), which is accepted by analysis tools. It is given in this textual file: [txt](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.pic) 
 
 ## 10. ABRTTDMS verification in CADP
 
-The analysis and verification of the ABRTTDMS system in CADP starts by converting the Pi-calculus code into LNT code using the CADP tool: [PIC2LNT](https://convecs.inria.fr/software/pic2lnt/)
+The analysis and verification of the ABRTTDMS system in CADP start by converting the Pi-calculus code into LNT code using the CADP tool: [PIC2LNT](https://convecs.inria.fr/software/pic2lnt/)
 
-There will be a generation of a labelled transition system (LTS), which represents the dynamic behavior of the LNT code with a set of states and transitions (system state space).
+This results in the generation of a labelled transition system (LTS), which represents the dynamic behavior of the LNT code with a set of states and transitions (the system state space).
 
-Afterthat, we need to construt the BCG (Binary Coded Graphs), which is a binary file format for LTS , that enable doing numerous types of analysis and verification. In fact, BCG is both a format for the LTS representation and a set of libraries and programs dealing with LTSs (information, display, edition, minimization, etc.).
+After that, we need to construct the BCG (Binary Coded Graphs), which is a binary file format for LTSs that enables numerous types of analysis and verification. In fact, BCG is both a format for the LTS representation and a set of libraries and programs dealing with LTSs (information, display, edition, minimization, etc.).
 
-BCG are generated from higher-level models of concurrent systems. We show the BCG graph constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). The BCG file itself is downloadable from here [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.bcg)
+BCGs are generated from higher-level models of concurrent systems. We show the BCG graph constructed by CADP for our ABRTTDMS system in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). The BCG file itself is downloadable here: [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.bcg)
 
-As we can notice, the LTS has a huge number of states and transitions, so the graph is very dense. CADP offers the possibility to reduce this huge number, by using Strong Equivalence, which results in a another equivalent graph with less states and transitions.
-Then, CADP offers mutiliple built-in verification tools as indicated in the following figure, and we can start checking whatever we want using these tools.
+As we can notice, the LTS has a huge number of states and transitions, so the graph is very dense. CADP offers the possibility to reduce this huge number by using Strong Equivalence, which results in another equivalent graph with fewer states and transitions.
+
+Then, CADP offers multiple built-in verification tools, as indicated in the following figure, and we can start checking whatever properties we want using these tools.
 <img width="1249" height="796" alt="Screenshot from 2026-03-10 10-33-53" src="https://github.com/user-attachments/assets/5386a7cd-fd35-444d-b1a1-65da11f30bdd" />
 
-
 ## Model checking
-Model checking is straitforward in CADP which offers multiple cutting-edge algorithms of model checking. The tool also provides the possiblity of using multiple format to express the properties we interested in verifying, such as .mcl, .xtl and even automating scripts in using SVG. As Model checking is considered among the main objectives of our apporach, so we show in the following lines examples of verification of some properties. We use the option "verify temporal formulas" where we can choose the properties to verify and the algorithmes we want to apply as indicated in the figure:
+Model checking is straightforward in CADP, which offers multiple cutting-edge model checking algorithms. The tool also provides the possibility of using multiple formats to express the properties we are interested in verifying, such as .mcl, .xtl, and even automated scripts using SVG. As model checking is considered one of the main objectives of our approach, we show in the following lines examples of the verification of some properties. We use the option "verify temporal formulas", where we can choose the properties to verify and the algorithms we want to apply, as indicated in the figure:
 
 <img width="452" height="619" alt="Screenshot from 2026-03-11 06-07-27" src="https://github.com/user-attachments/assets/f193c91d-e320-4f6e-a85e-5b8e13cca843" />
 
 ## Property Specifications
-The properties specifications can be downloadable from here: [PropertiesToVerify](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/propertiesToVerify.rar)
+The specifications of the properties can be downloaded from here: [PropertiesToVerify](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/propertiesToVerify.rar)
+
 ### Safety Properties
 
 **SP1.mcl**(* SP1: MIC never executes a query without prior successful authentication *)
@@ -434,7 +434,7 @@ and
   'PUBLIC .*allValidationsComplete.*'
 ] false
 ```
-The results of checking the safety properties in CADP is given in the following figure:
+The results of checking the safety properties in CADP are given in the following figure:
 <img width="1269" height="815" alt="Screenshot from 2026-03-10 09-58-54" src="https://github.com/user-attachments/assets/2bdb03de-cbc3-4ff9-87bb-5437c06260b8" />
 
 ### Liveness Properties
@@ -500,7 +500,7 @@ The results of checking the safety properties in CADP is given in the following 
   )
 ```
 
-The results of checking the liveness properties in CADP is given in the following figure:
+The results of checking the liveness properties in CADP are given in the following figure:
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-08-14" src="https://github.com/user-attachments/assets/54575c91-02ee-421e-97f5-694aca0dcd94" />
 
 
@@ -597,19 +597,19 @@ and
 ] false
 ```
 
-The results of checking the mobility properties in CADP is given in the following figure:
+The results of checking the mobility properties in CADP are given in the following figure:
 
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-23-52" src="https://github.com/user-attachments/assets/39ea9f1e-5a7f-44b5-aae1-a0cfb0c9cb62" />
 
 
-## Other verification possibilities
+## Other verification capabilities
 
-As indicated earlier, CADP offers a large palette of verification tools. Thus, It is also possible to check in the ABRTTDMS the existing of any deadlock, unreachable states, the livelock, and other properties using built-in verification tools in inside CADP as we showed in the first figure:
+As indicated earlier, CADP offers a large palette of verification tools. Thus, it is also possible to check in ABRTTDMS the existence of any deadlock, unreachable states, livelock, and other properties using built-in verification tools inside CADP, as shown in the first figure.
 
-Therefore, It is possilbe to simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
+Therefore, it is possible to simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using the "Execution sequences" or "Find path to state" options.
 
-Another option is to draw in realtime the LTS of the BCG and edit it immediately if interested in visualizing specific parts of the LTS to understand more the system.
+Another option is to draw in real time the LTS of the BCG and edit it immediately if we are interested in visualizing specific parts of the LTS in order to better understand the system.
 
-We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking. We can check for example that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property easily.
+We can also use another very interesting tool in pi-calculus, which is equivalence checking. In fact, CADP offers many algorithms to check different types of equivalence. For example, we can check that the agents LRDA and TMCA have similar behavior in a part of their executions. Observational equivalence checking in CADP can detect such a property easily.
 
-Finally, We can also show the statistics of performance of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or have general statistics about all the process.
+Finally, we can also show the performance statistics of every verification tool executed (a file is generated for every tool executed and contains all the details of the operation), or obtain general statistics about the whole process.
