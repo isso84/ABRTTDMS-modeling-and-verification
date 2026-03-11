@@ -435,30 +435,63 @@ and
 
 **LP1.mcl**(* LP1: after incidentAlert, arrivedAtTMCA is inevitably reachable *)
 ```mcl
-[ true* . 'PUBLIC .*incidentAlert.*' ]
-  <true*> 'PUBLIC .*arrivedAtTMCA.*'
+(* LP1: After incidentAlert, arrivedAtTMCA is inevitably reachable *)
+
+[
+  true* .
+  'PUBLIC .*incidentAlert.*'
+]
+  (
+    [
+      (not 'PUBLIC .*arrivedAtTMCA.*')*
+    ] false
+  )
 ```
 
 **LP2.mcl**(* LP2: after dispatchCommand, either releaseResources or timeoutExceeded is reached *)
 ```mcl
-[ true* . 'PUBLIC .*dispatchCommand.*' ]
-  <true*> (
-    <true*> 'PUBLIC .*releaseResources.*'
-    or
-    <true*> 'PUBLIC .*timeoutExceeded.*'
+(* LP2: After dispatchCommand, either releaseResources or timeoutExceeded is reached *)
+
+[
+  true* .
+  'PUBLIC .*dispatchCommand.*'
+]
+  (
+    [
+      (not 'PUBLIC .*releaseResources.*')* .
+      (not 'PUBLIC .*timeoutExceeded.*')*
+    ] false
   )
 ```
 
 **LP3.mcl**(* LP3: after verificationRequest, verificationReport is inevitably reachable *)
 ```mcl
-[ true* . 'PUBLIC .*verificationRequest.*' ]
-  <true*> 'PUBLIC .*verificationReport.*'
+(* LP3: After verificationRequest, verificationReport is inevitably reachable *)
+
+[
+  true* .
+  'PUBLIC .*verificationRequest.*'
+]
+  (
+    [
+      (not 'PUBLIC .*verificationReport.*')*
+    ] false
+  )
 ```
 
 **LP4.mcl**(* LP4: after networkFailure followed by retryTimerExpired, system is operational *)
 ```mcl
-[ true* . 'PUBLIC .*networkFailure.*' ]
-  <true*> 'PUBLIC .*retryTimerExpired.*'
+(* LP4: After networkFailure, retry mechanism eventually activates *)
+
+[
+  true* .
+  'PUBLIC .*networkFailure.*'
+]
+  (
+    [
+      (not 'PUBLIC .*retryTimerExpired.*')*
+    ] false
+  )
 ```
 
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-08-14" src="https://github.com/user-attachments/assets/54575c91-02ee-421e-97f5-694aca0dcd94" />
