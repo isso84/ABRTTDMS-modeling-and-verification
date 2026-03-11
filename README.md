@@ -429,6 +429,8 @@ and
 ] false
 ```
 
+<img width="1269" height="815" alt="Screenshot from 2026-03-10 09-58-54" src="https://github.com/user-attachments/assets/2bdb03de-cbc3-4ff9-87bb-5437c06260b8" />
+
 ### Liveness Properties
 
 **LP1.mcl**(* LP1: after incidentAlert, arrivedAtTMCA is inevitably reachable *)
@@ -515,7 +517,8 @@ and
 
 Some results of checking these properties in CADP is given in the following figure:
 
-<img width="1269" height="815" alt="Screenshot from 2026-03-10 09-58-54" src="https://github.com/user-attachments/assets/2bdb03de-cbc3-4ff9-87bb-5437c06260b8" />
+<img width="1157" height="729" alt="Screenshot from 2026-03-11 05-23-52" src="https://github.com/user-attachments/assets/39ea9f1e-5a7f-44b5-aae1-a0cfb0c9cb62" />
+
 
 ## Other verification possibilities
 
