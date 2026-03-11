@@ -391,7 +391,7 @@ Model checking is straitforward in CADP which offers multiple cutting-edge algor
 <img width="452" height="619" alt="Screenshot from 2026-03-11 06-07-27" src="https://github.com/user-attachments/assets/f193c91d-e320-4f6e-a85e-5b8e13cca843" />
 
 ## Property Specifications
-The properties specifications can be downloadable from here: [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.bcg)
+The properties specifications can be downloadable from here: [PropertiesToVerify](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/propertiesToVerify.rar)
 ### Safety Properties
 
 **SP1.mcl**(* SP1: MIC never executes a query without prior successful authentication *)
