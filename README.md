@@ -375,18 +375,23 @@ The syntax of the code in the document is abstract, however the tool generates a
 
 The analysis and verification of the ABRTTDMS system in CADP starts by converting the Pi-calculus code into LNT code using the CADP tool: [PIC2LNT](https://convecs.inria.fr/software/pic2lnt/)
 
-There will be a generation of a labelled transition system (LTS), which represents the dynamic behavior oo the LNT code with a set of states and transitions (system state space).
+There will be a generation of a labelled transition system (LTS), which represents the dynamic behavior of the LNT code with a set of states and transitions (system state space).
 
 Afterthat, we need to construt the BCG (Binary Coded Graphs), which is a binary file format for LTS , that enable doing numerous types of analysis and verification. In fact, BCG is both a format for the LTS representation and a set of libraries and programs dealing with LTSs (information, display, edition, minimization, etc.).
 
-BCG are generated from higher-level models of concurrent systems. We show the BCG constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). The BCG file itself is downloadable from here [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.bcg)
+BCG are generated from higher-level models of concurrent systems. We show the BCG graph constructed by CADP for our system ABRTTDMS in the attached file: [PS](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/aissam_bcg_draw_rZT1tb.ps). The BCG file itself is downloadable from here [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.bcg)
 
 As we can notice, the LTS has a huge number of states and transitions, so the graph is very dense. CADP offers the possibility to reduce this huge number, by using Strong Equivalence, which results in a another equivalent graph with less states and transitions.
-Then, CADP offers mutiliple built-in verification tools, and we can start checking whatever we want using these tools.
+Then, CADP offers mutiliple built-in verification tools as indicated in the following figure, and we can start checking whatever we want using these tools.
+<img width="1249" height="796" alt="Screenshot from 2026-03-10 10-33-53" src="https://github.com/user-attachments/assets/5386a7cd-fd35-444d-b1a1-65da11f30bdd" />
+
 
 ## Model checking
-Model checking is straitforward in CADP which offers multiple cutting-edge algorithms of model checking. The tool also provides the possiblity of using multiple format to express the properties we interested in verifying, such as .mcl, .xtl and even automating scripts in using SVG. As Model checking is considered among the main objectives of our apporach, we show in the following lines examples of verification of some properties.
+Model checking is straitforward in CADP which offers multiple cutting-edge algorithms of model checking. The tool also provides the possiblity of using multiple format to express the properties we interested in verifying, such as .mcl, .xtl and even automating scripts in using SVG. As Model checking is considered among the main objectives of our apporach, so we show in the following lines examples of verification of some properties. We use the option "verify temporal formulas" where we can choose the properties to verify and the algorithmes we want to apply as indicated in the figure:
+<img width="452" height="619" alt="Screenshot from 2026-03-11 06-07-27" src="https://github.com/user-attachments/assets/f193c91d-e320-4f6e-a85e-5b8e13cca843" />
+
 ## Property Specifications
+The properties specifications can be downloadable from here: [BCG](https://github.com/isso84/ABRTTDMS-modeling-and-verification/blob/main/micsystem.bcg)
 ### Safety Properties
 
 **SP1.mcl**(* SP1: MIC never executes a query without prior successful authentication *)
@@ -598,13 +603,11 @@ The results of checking the mobility properties in CADP is given in the followin
 
 ## Other verification possibilities
 
-It is also possible to check in the ABRTTDMS the existing of any deadlock, unreachable states, the livelock, and other built-in interesteing verifications as shown in the figure:
+As indicated earlier, CADP offers a large palette of verification tools. Thus, It is also possible to check in the ABRTTDMS the existing of any deadlock, unreachable states, the livelock, and other properties using built-in verification tools in inside CADP as we showed in the first figure:
 
-<img width="1249" height="796" alt="Screenshot from 2026-03-10 10-33-53" src="https://github.com/user-attachments/assets/5386a7cd-fd35-444d-b1a1-65da11f30bdd" />
+Therefore, It is possilbe to simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
 
-It is possilbe also to simulate the behavior of agents in ABRTTDMS by executing their pi-calculus code using "Execution sequences" or "Find path to state" options.
-
-Another opotion is to draw in realtime the LTS of the BCG and edit it immediately if interested in visualizing specific parts of the LTS to understand more the system.
+Another option is to draw in realtime the LTS of the BCG and edit it immediately if interested in visualizing specific parts of the LTS to understand more the system.
 
 We can also use a very interested tool in pi-calculus which is the equivalence checking. In fact the CADP offers many algorithms to check different types of equivalence checking. We can check for example that the agents LRDA and TMCA have similar behavior in a part of their both executions. The observational equivalence checking in CADP can detect such property easily.
 
