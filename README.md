@@ -428,7 +428,7 @@ and
   'PUBLIC .*allValidationsComplete.*'
 ] false
 ```
-
+The results of checking the safety properties in CADP is given in the following figure:
 <img width="1269" height="815" alt="Screenshot from 2026-03-10 09-58-54" src="https://github.com/user-attachments/assets/2bdb03de-cbc3-4ff9-87bb-5437c06260b8" />
 
 ### Liveness Properties
@@ -494,6 +494,7 @@ and
   )
 ```
 
+The results of checking the liveness properties in CADP is given in the following figure:
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-08-14" src="https://github.com/user-attachments/assets/54575c91-02ee-421e-97f5-694aca0dcd94" />
 
 
@@ -590,7 +591,7 @@ and
 ] false
 ```
 
-Some results of checking these properties in CADP is given in the following figure:
+The results of checking the mobility properties in CADP is given in the following figure:
 
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-23-52" src="https://github.com/user-attachments/assets/39ea9f1e-5a7f-44b5-aae1-a0cfb0c9cb62" />
 
