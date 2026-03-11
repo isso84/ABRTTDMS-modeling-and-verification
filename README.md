@@ -459,6 +459,9 @@ and
   <true*> 'PUBLIC .*retryTimerExpired.*'
 ```
 
+<img width="1157" height="729" alt="Screenshot from 2026-03-11 05-08-14" src="https://github.com/user-attachments/assets/54575c91-02ee-421e-97f5-694aca0dcd94" />
+
+
 ### Mobility Properties
 
 **MP1.mcl**(* MP1a: Police is always visited before Emergency *)
