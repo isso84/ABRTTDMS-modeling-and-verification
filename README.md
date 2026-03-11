@@ -388,6 +388,7 @@ Then, CADP offers mutiliple built-in verification tools as indicated in the foll
 
 ## Model checking
 Model checking is straitforward in CADP which offers multiple cutting-edge algorithms of model checking. The tool also provides the possiblity of using multiple format to express the properties we interested in verifying, such as .mcl, .xtl and even automating scripts in using SVG. As Model checking is considered among the main objectives of our apporach, so we show in the following lines examples of verification of some properties. We use the option "verify temporal formulas" where we can choose the properties to verify and the algorithmes we want to apply as indicated in the figure:
+
 <img width="452" height="619" alt="Screenshot from 2026-03-11 06-07-27" src="https://github.com/user-attachments/assets/f193c91d-e320-4f6e-a85e-5b8e13cca843" />
 
 ## Property Specifications
