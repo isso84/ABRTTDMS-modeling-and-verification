@@ -384,7 +384,7 @@ As we can notice, the LTS has a huge number of states and transitions, so the gr
 Then, CADP offers multiple built-in verification tools, as indicated in the following figure, and we can start checking whatever properties we want using these tools.
 <img width="1249" height="796" alt="Screenshot from 2026-03-10 10-33-53" src="https://github.com/user-attachments/assets/5386a7cd-fd35-444d-b1a1-65da11f30bdd" />
 
-## Model checking
+### 10.1 Model checking
 Model checking is straightforward in CADP, which offers multiple cutting-edge model checking algorithms. The tool also provides the possibility of using multiple formats to express the properties we are interested in verifying, such as .mcl, .xtl, and even automated scripts using SVG. As model checking is considered one of the main objectives of our approach, we show in the following lines examples of the verification of some properties. We use the option "verify temporal formulas", where we can choose the properties to verify and the algorithms we want to apply, as indicated in the figure:
 
 <img width="452" height="619" alt="Screenshot from 2026-03-11 06-07-27" src="https://github.com/user-attachments/assets/f193c91d-e320-4f6e-a85e-5b8e13cca843" />
@@ -601,7 +601,7 @@ The results of checking the mobility properties in CADP are given in the followi
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-23-52" src="https://github.com/user-attachments/assets/39ea9f1e-5a7f-44b5-aae1-a0cfb0c9cb62" />
 
 
-## Other verification capabilities
+### 10.2 Other verification capabilities
 
 As indicated earlier, CADP offers a large palette of verification tools. Thus, it is also possible to check in ABRTTDMS the existence of any deadlock, unreachable states, livelock, and other properties using built-in verification tools inside CADP, as shown in the first figure.
 
