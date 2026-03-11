@@ -468,46 +468,88 @@ and
 
 **MP1.mcl**(* MP1a: Police is always visited before Emergency *)
 ```mcl
+(* MP1: MIC follows itinerary Police -> Emergency -> Maintenance -> TMCA *)
+
+(* Part 1: Police must come before Emergency *)
 [
   (not 'PUBLIC .*arrivedAtPolice.*')* .
   'PUBLIC .*arrivedAtEmergency.*'
 ] false
 and
+(* Part 2: Emergency must come before Maintenance *)
 [
   (not 'PUBLIC .*arrivedAtEmergency.*')* .
   'PUBLIC .*arrivedAtMaintenance.*'
 ] false
 and
-[ true* . 'PUBLIC .*arrivedAtPolice.*' ]
-  <true*> 'PUBLIC .*arrivedAtEmergency.*'
+(* Part 3: After Police, Emergency is eventually reached *)
+[
+  true* .
+  'PUBLIC .*arrivedAtPolice.*'
+]
+  (
+    [
+      (not 'PUBLIC .*arrivedAtEmergency.*')*
+    ] false
+  )
 and
-[ true* . 'PUBLIC .*arrivedAtEmergency.*' ]
-  <true*> 'PUBLIC .*arrivedAtMaintenance.*'
+(* Part 4: After Emergency, Maintenance is eventually reached *)
+[
+  true* .
+  'PUBLIC .*arrivedAtEmergency.*'
+]
+  (
+    [
+      (not 'PUBLIC .*arrivedAtMaintenance.*')*
+    ] false
+  )
 and
-[ true* . 'PUBLIC .*arrivedAtMaintenance.*' ]
-  <true*> 'PUBLIC .*arrivedAtTMCA.*'
+(* Part 5: After Maintenance, TMCA is eventually reached *)
+[
+  true* .
+  'PUBLIC .*arrivedAtMaintenance.*'
+]
+  (
+    [
+      (not 'PUBLIC .*arrivedAtTMCA.*')*
+    ] false
+  )
 ```
 
 **MP2.mcl**(* MP2: after prepareFailureReport (AbortingMission), arrivedAtTMCA is reachable *)
 ```mcl
-[ true* . 'PUBLIC .*prepareFailureReport.*' ]
-  <true*> 'PUBLIC .*arrivedAtTMCA.*'
+(* MP2: After mission abort, arrivedAtTMCA is reachable *)
+
+[
+  true* .
+  'PUBLIC .*prepareFailureReport.*'
+]
+  (
+    [
+      (not 'PUBLIC .*arrivedAtTMCA.*')*
+    ] false
+  )
 ```
 
 **MP3.mcl**(* MP3a: agent cannot be at Police and Emergency at the same time *)
 ```mcl
+(* MP3: Agent completes operations at each location before moving to next *)
+
+(* Part 1: Cannot arrive at Emergency before completing Police mission *)
 [
   'PUBLIC .*arrivedAtPolice.*' .
   (not 'PUBLIC .*missionStep1Complete.*')* .
   'PUBLIC .*arrivedAtEmergency.*'
 ] false
 and
+(* Part 2: Cannot arrive at Maintenance before completing Emergency mission *)
 [
   'PUBLIC .*arrivedAtEmergency.*' .
   (not 'PUBLIC .*missionStep2Complete.*')* .
   'PUBLIC .*arrivedAtMaintenance.*'
 ] false
 and
+(* Part 3: Cannot loop back to Police before completing Maintenance mission *)
 [
   'PUBLIC .*arrivedAtMaintenance.*' .
   (not 'PUBLIC .*missionStep3Complete.*')* .
