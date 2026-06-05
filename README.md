@@ -600,6 +600,181 @@ The results of checking the mobility properties in CADP are given in the followi
 
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-23-52" src="https://github.com/user-attachments/assets/39ea9f1e-5a7f-44b5-aae1-a0cfb0c9cb62" />
 
+The details of Analysis for all properties are given here:
+
+## Verification Execution Log
+
+```bash
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ export PIC=~/pic2lnt
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time pic2lnt micsystem.pic
+
+real    0m0.183s
+user    0m0.174s
+sys     0m0.007s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time $PIC/com/pic2bcg micsystem.pic
+
+// ...
+// ... detailed information about the construction of the BCG ...
+// ...
+
+     termination on SOFTWARE_TERMINATION signal (files completed)
+     quit
+
+real    7m38.166s
+user    7m33.350s
+sys     0m4.320s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ bcg_info micsystem.bcg
+
+./micsystem.bcg:
+created by caesar
+    79706 states
+    79708 transitions
+    39855 labels
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./SP1.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./SP1.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    0m22.983s
+user    0m22.377s
+sys     0m0.424s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./SP2.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./SP2.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(empty diagnostic in file ``evaluator.bcg'')
+
+real    0m0.528s
+user    0m0.236s
+sys     0m0.176s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./SP3.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./SP3.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    0m21.524s
+user    0m21.098s
+sys     0m0.306s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./SP4.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./SP4.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(empty diagnostic in file ``evaluator.bcg'')
+
+real    0m0.587s
+user    0m0.227s
+sys     0m0.221s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./LP1.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./LP1.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    0m20.554s
+user    0m19.938s
+sys     0m0.466s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./LP2.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./LP2.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    0m23.119s
+user    0m22.470s
+sys     0m0.502s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./LP3.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./LP3.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    0m24.427s
+user    0m23.953s
+sys     0m0.331s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./LP4.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./LP4.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    0m28.057s
+user    0m27.587s
+sys     0m0.324s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./MP1.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./MP1.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    2m52.310s
+user    2m51.753s
+sys     0m0.389s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./MP2.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./MP2.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(consult diagnostic in file ``evaluator.bcg'')
+
+real    0m22.512s
+user    0m21.911s
+sys     0m0.414s
+
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ time bcg_open "micsystem.bcg" evaluator -bfs -diag evaluator.bcg "./MP3.mcl"
+
+bcg_open: using ``/home/aissam/cadp/bin.x64/evaluator.a''
+bcg_open: running ``evaluator -bfs -diag evaluator.bcg ./MP3.mcl'' for ``./micsystem.bcg''
+
+TRUE
+(empty diagnostic in file ``evaluator.bcg'')
+
+real    0m0.640s
+user    0m0.280s
+sys     0m0.233s
+aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ xeuca
+//...
+//...use the graphical editor XEUCA for additional built-in one-click verification...
+//...
+```
+
+
+
+
+
 
 ### 10.2 Other verification capabilities
 
