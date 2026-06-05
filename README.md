@@ -601,9 +601,7 @@ The results of checking the mobility properties in CADP are given in the followi
 <img width="1157" height="729" alt="Screenshot from 2026-03-11 05-23-52" src="https://github.com/user-attachments/assets/39ea9f1e-5a7f-44b5-aae1-a0cfb0c9cb62" />
 
 ### Details of Analysis and Verification
-The details of Analysis and verification for all properties are given here:
-
-## Verification Execution Log
+The details of Analysis and verification for all properties are given here (Verification Execution Log):
 
 ```bash
 aissam@aissam-VirtualBox:~/pic2lnt/MICsystem$ export PIC=~/pic2lnt
